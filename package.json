@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href /cases-task/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:cases-task": "node dist/cases-task/server/server.mjs"
