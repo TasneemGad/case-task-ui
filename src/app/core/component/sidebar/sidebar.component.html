@@ -1,0 +1,110 @@
+<div class="min-h-screen ">
+<aside [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'" [class.md:w-64]="!isCollapsed()" [class.md:w-16]="isCollapsed()"
+  class="w-full bg-[#f8f9fa] md:bg-white border-b md:border-b-0 md:border-s border-slate-200/80 p-3 md:p-3 flex flex-col justify-between shrink-0 transition-all duration-300 min-h-screen">
+
+  <div>
+    <div class="flex items-center pb-4 md:pb-6 border-b border-slate-100/60" [class.justify-between]="!isCollapsed()"
+      [class.justify-center]="isCollapsed()">
+
+      @if (!isCollapsed()) {
+      <button class="cursor-pointer flex items-center gap-2" (click)="toggleSidebar()">
+        <div class="h-8 flex items-center justify-center">
+          <img src="imgs/logo.svg" alt="Haroon Logo" class="h-full object-contain">
+        </div>
+      </button>
+      } @else {
+      <button class="cursor-pointer h-8 flex items-center justify-center" (click)="toggleSidebar()">
+        <img src="imgs/small-logo.svg" alt="Haroon Logo" class="h-full object-contain">
+      </button>
+      }
+
+      <div class="flex items-center gap-2 text-slate-500">
+        @if (!isCollapsed()) {
+        <button (click)="toggleSidebar()"
+          class="cursor-pointer p-1.5 hover:text-slate-700 transition-colors rounded-lg hover:bg-slate-100">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+
+        <button (click)="isCollapsed.set(!isCollapsed())"
+          class="cursor-pointer p-1.5 hover:text-slate-700 transition-colors rounded-lg hover:bg-slate-100">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M4.16667 2.5H15.8333C16.7538 2.5 17.5 3.24619 17.5 4.16667V15.8333C17.5 16.7538 16.7538 17.5 15.8333 17.5H4.16667C3.24619 17.5 2.5 16.7538 2.5 15.8333V4.16667C2.5 3.24619 3.24619 2.5 4.16667 2.5Z"
+              stroke="#191919" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M12.5 2.5V17.5" stroke="#191919" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M6.66675 12.5L9.16675 10L6.66675 7.5" stroke="#191919" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+        }
+      </div>
+    </div>
+
+    <nav class="py-4 space-y-3 hidden md:block">
+      @if (isCollapsed()) {
+      <a href="#" title="Search"
+        class="flex justify-center p-2 text-slate-700 hover:bg-slate-100 rounded-xl transition-colors">
+        <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </a>
+      }
+
+      @for (item of navItems(); track item.key) {
+      <a [href]="item.link" [title]="item.key | translate" class="flex items-center transition-colors rounded-xl"
+        [class.text-slate-700]="!item.isActive" [class.hover:bg-slate-100]="!item.isActive"
+        [class.bg-slate-200/70]="item.isActive && isCollapsed()" [class.bg-slate-100]="item.isActive && !isCollapsed()"
+        [class.justify-center]="isCollapsed()" [class.p-2]="isCollapsed()" [class.px-3]="!isCollapsed()"
+        [class.py-2]="!isCollapsed()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path [attr.d]="item.iconPath" [attr.stroke]="item.isActive ? '#191919' : '#444444'" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+
+        @if (!isCollapsed()) {
+        <span class="ms-2.5 text-xs" [class.font-bold]="item.isActive" [class.text-slate-900]="item.isActive"
+          [class.font-medium]="!item.isActive">
+          {{ item.key | translate }}
+        </span>
+        }
+      </a>
+      }
+    </nav>
+
+    @if (!isCollapsed()) {
+    <div class="mt-6 pt-4 border-t border-slate-100/80 hidden md:block">
+      <h3 class="text-[11px] font-medium text-slate-400 mb-3 px-2 text-start">
+        {{ 'navigation.chatHistory' | translate }}
+      </h3>
+      <ul class="space-y-2 text-xs text-slate-600 px-2">
+        @for (chat of chatHistory(); track chat.id) {
+        <li class="hover:text-slate-900 cursor-pointer truncate text-start transition-colors">
+          {{ chat.title }}
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </div>
+
+  <div class="pt-4 border-t border-slate-100 hidden md:flex items-center" [class.justify-center]="isCollapsed()"
+    [class.justify-between]="!isCollapsed()">
+    <div class="flex items-center gap-3">
+      <div
+        class="w-8 h-8 rounded-full bg-black text-white font-semibold flex items-center justify-center text-xs shrink-0">
+        ZA
+      </div>
+      @if (!isCollapsed()) {
+      <div class="text-start leading-tight">
+        <div class="text-xs font-bold text-slate-800"><bdi>Rafat salah</bdi></div>
+        <div class="text-[11px] text-slate-400">plus</div>
+      </div>
+      }
+    </div>
+  </div>
+</aside>
+</div>

@@ -1,0 +1,157 @@
+<div [dir]="dir()" class="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs mb-8 w-full">
+  <div class="overflow-x-auto w-full">
+    <table class="w-full text-xs text-start min-w-175">
+      <thead class="bg-slate-50/50 border-b border-slate-100 text-slate-400 font-medium">
+        <tr>
+          @if (config().selectable) {
+          <th class="p-4 text-start w-10">
+            <input
+              type="checkbox"
+              class="rounded border-slate-300 text-[#c49a6c] focus:ring-[#c49a6c]"
+              [checked]="allSelected()"
+              (change)="toggleAll()"
+            />
+          </th>
+          }
+
+          @for (col of config().columns; track col.key) {
+          <th
+            class="p-4 text-start font-normal whitespace-nowrap"
+            [class.cursor-pointer]="col.sortable"
+            [class.hover:text-slate-600]="col.sortable"
+            [class.transition-colors]="col.sortable"
+            [ngClass]="col.headerClass"
+            (click)="onSort(col)"
+          >
+            <div class="inline-flex items-center gap-1.5">
+              <span>{{ col.labelKey | translate }}</span>
+              @if (col.sortable) {
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"
+                />
+              </svg>
+              }
+            </div>
+          </th>
+          }
+
+          @if (config().showActions) {
+          <th class="p-4 text-center font-normal whitespace-nowrap">
+            {{ (config().actionsLabelKey || 'table.actions') | translate }}
+          </th>
+          }
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-slate-100 text-slate-600">
+        @for (row of data(); track trackByFn($index, row); let i = $index) {
+        <tr class="hover:bg-slate-50/60 transition-colors">
+          @if (config().selectable) {
+          <td class="p-4">
+            <input
+              type="checkbox"
+              class="rounded border-slate-300 text-[#c49a6c] focus:ring-[#c49a6c]"
+              [checked]="isSelected(row)"
+              (change)="toggleRow(row)"
+            />
+          </td>
+          }
+
+          @for (col of config().columns; track col.key) {
+          <td
+            class="p-4 whitespace-nowrap"
+            [class.text-center]="col.align === 'center'"
+            [class.text-end]="col.align === 'end'"
+            [ngClass]="col.cellClass"
+          >
+            @switch (col.type) {
+              @case ('text') {
+                <span class="font-semibold text-slate-800"><bdi>{{ getValue(row, col.key) }}</bdi></span>
+              }
+
+              @case ('textSub') {
+                <div class="font-bold text-slate-800 mb-0.5 whitespace-nowrap">
+                  <bdi>{{ getValue(row, col.key) }}</bdi>
+                </div>
+                @if (col.subKey) {
+                <div class="text-[11px] text-slate-400 whitespace-nowrap">
+                  <bdi>{{ getValue(row, col.subKey) }}</bdi>
+                </div>
+                }
+              }
+
+              @case ('badge') {
+                <span
+                  class="px-3 py-1 rounded-full text-[10px] font-bold inline-block"
+                  [ngClass]="getBadgeClass(col, row)"
+                >
+                  {{ getBadgeLabelKey(col, row) | translate }}
+                </span>
+              }
+
+              @case ('parties') {
+                <div class="flex items-center gap-1.5 flex-nowrap whitespace-nowrap">
+                  @for (party of getParties(col, row); track $index) {
+                    @if ($index > 0) {
+                      <span class="text-amber-600 font-bold mx-0.5">{{ col.parties!.separatorLabelKey | translate }}</span>
+                    }
+                    <span class="font-bold text-slate-800"><bdi>{{ party.name }}</bdi></span>
+                    @if (party.type) {
+                      <span class="text-[10px] text-slate-400">(<bdi>{{ party.type }}</bdi>)</span>
+                    }
+                  }
+                </div>
+              }
+
+              @case ('dateIcon') {
+                <div class="flex items-center gap-1.5 text-slate-500">
+                  <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <div class="flex items-center gap-1">
+                    <span><bdi>{{ getValue(row, col.dateIcon!.valueKey) }}</bdi> {{ col.dateIcon!.unitLabelKey | translate }}</span>
+                    <span>—</span>
+                    <span class="text-[#c49a6c]"><bdi>{{ getValue(row, col.dateIcon!.typeKey) }}</bdi></span>
+                  </div>
+                </div>
+              }
+
+              @case ('custom') {
+                <bdi>{{ getCustomValue(col, row) }}</bdi>
+              }
+            }
+          </td>
+          }
+
+          @if (config().showActions) {
+          <td class="p-4 text-center whitespace-nowrap">
+            <button class="text-slate-300 hover:text-slate-500 p-1 transition-colors" (click)="onRowAction(row, i)">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                />
+              </svg>
+            </button>
+          </td>
+          }
+        </tr>
+        } @empty {
+        <tr>
+          <td [attr.colspan]="config().columns.length + (config().selectable ? 1 : 0) + (config().showActions ? 1 : 0)" class="p-12 text-center text-slate-400">
+            {{ config().emptyMessageKey | translate }}
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
