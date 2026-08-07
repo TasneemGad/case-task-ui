@@ -1,0 +1,49 @@
+{
+  "common": {
+    "brandName": "هارون",
+    "vs": "ضد",
+    "days": "يوم"
+  },
+  "header": {
+    "title": "القضايا",
+    "subtitle": "إدارة جميع القضايا القانونية",
+    "newCase": "قضية جديدة"
+  },
+  "navigation": {
+    "newChat": "دردشة جديدة",
+    "clients": "العملاء",
+    "adminPanel": "لوحة الإدارة",
+    "cases": "القضايا",
+    "legalLibrary": "المكتبة القانونية",
+    "chatHistory": "سجل الدردشات"
+  },
+  "filters": {
+    "all": "الكل",
+    "ongoing": "ساريه",
+    "urgent": "عاجلة",
+    "finished": "منتهية",
+    "searchPlaceholder": "ابحث في القضايا ...."
+  },
+  "table": {
+    "caseNumber": "رقم القضية",
+    "caseTitle": "عنوان القضية",
+    "stage": "المرحلة",
+    "parties": "الاطراف",
+    "status": "الحالة",
+    "nextDate": "أقرب موعد",
+    "actions": "الإجراءات"
+  },
+  "pagination": {
+    "show": "عرض"
+  },
+  "chatTopics": {
+    "logoDesignTips": "نصائح تصميم الشعار",
+    "portugalTrip": "رحلة لمدة 3 أيام إلى البرتغال",
+    "effectiveIcons": "كيفية استخدام الرموز بفعالية",
+    "uxImportance": "أهمية التجربة البصرية للمستخدم",
+    "adaptiveDesign": "استراتيجيات التصميم القابلة للتكيف",
+    "negativeSpace": "أهمية الفضاء السلبي في التصميم",
+    "fontsBranding": "تأثير الخطوط على الهوية البصرية",
+    "colorPalette": "استراتيجيات اختيار الألوان"
+  }
+}
