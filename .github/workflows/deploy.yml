@@ -1,0 +1,51 @@
+name: Deploy Angular App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - dev 
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Angular app
+        run: npx ng build --base-href /case-task-ui/
+
+      - name: Prepare build output for GitHub Pages
+        run: |
+          if [ -d "docs/browser" ]; then
+            cp -r docs/browser/* docs/
+            rm -rf docs/browser docs/server
+          fi
+          
+         
+          touch .nojekyll
+          touch docs/.nojekyll
+          
+          # Create 404.html for Angular client-side routing
+          cp docs/index.html docs/404.html
+
+      - name: Commit and Push changes back to dev branch
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .nojekyll docs/
+          git status
+          git diff-index --quiet HEAD || git commit -m "chore(ci): auto-build angular app for deployment [skip ci]"
+          git push
