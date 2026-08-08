@@ -1,10 +1,11 @@
-<div
-  class=" font-sans text-ink flex flex-col md:flex-row-reverse rounded-b-2xl">
+<div class=" font-sans text-ink flex flex-col md:flex-row-reverse rounded-b-2xl">
 
-  <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto max-w-7xl w-full">
+  <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto w-full">
+
     <div class="flex flex-col-reverse sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-      <div class="text-end sm:text-start w-full sm:w-auto">
-        <h1 class="text-2xl sm:text-3xl font-bold text-ink tracking-tight">{{ 'header.title' | translate }}</h1>
+      <div class=" w-full sm:w-auto">
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-ink tracking-tight">{{ 'header.title' | translate }}
+        </h1>
         <p class="text-xs text-secondary-text mt-1">{{ 'header.subtitle' | translate }}</p>
       </div>
       <button
@@ -19,11 +20,12 @@
         </span>
         <span>{{ 'header.newCase' | translate }}</span>
       </button>
-
     </div>
-    <div
-      class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-6">
-      <div class="flex items-center gap-1 bg-pagination p-1 rounded-xl border border-border text-xs overflow-x-auto ">
+
+    <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 mb-6">
+
+      <div
+        class="flex items-center gap-1 bg-pagination p-1 rounded-xl border border-border text-xs overflow-x-auto w-auto lg:w-auto">
         @for (tab of filterTabs; track tab.key) {
         <button (click)="activeTab.set(tab.key)"
           [class]="activeTab() === tab.key ? 'border border-text-ink text-ink font-bold' : 'text-secondary-text hover:text-ink'"
@@ -42,43 +44,49 @@
         </svg>
       </div>
 
-      <div class="inline-flex items-center gap-1 rounded-2xl bg-canvas p-1 border border-border">
-        <button type="button" (click)="setViewMode('list')" [class]="viewMode() === 'list'
-      ? 'rounded-xl bg-brand-gold text-surface shadow-xs'
-      : 'rounded-xl bg-surface text-secondary-text hover:text-ink'"
-          class="flex h-10 w-10 items-center justify-center transition-all duration-200">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="4" y1="7" x2="20" y2="7" />
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="17" x2="20" y2="17" />
-          </svg>
-        </button>
-        <button type="button" (click)="setViewMode('grid')" [class]="viewMode() === 'grid'
-      ? 'rounded-xl bg-brand-gold text-surface shadow-xs'
-      : 'rounded-xl bg-surface text-secondary-text hover:text-ink'"
-          class="flex h-10 w-10 items-center justify-center transition-all duration-200">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7" rx="1.5" />
-            <rect x="14" y="3" width="7" height="7" rx="1.5" />
-            <rect x="14" y="14" width="7" height="7" rx="1.5" />
-            <rect x="3" y="14" width="7" height="7" rx="1.5" />
-          </svg>
-        </button>
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full lg:w-auto">
 
+        <div
+          class="inline-flex items-center gap-1 rounded-2xl bg-canvas p-1 border border-border self-center sm:self-auto shrink-0">
+          <button type="button" (click)="setViewMode('list')" [class]="viewMode() === 'list'
+        ? 'rounded-xl bg-brand-gold text-surface shadow-xs'
+        : 'rounded-xl bg-surface text-secondary-text hover:text-ink'"
+            class="flex h-10 w-10 items-center justify-center transition-all duration-200">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="7" x2="20" y2="7" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <line x1="4" y1="17" x2="20" y2="17" />
+            </svg>
+          </button>
+          <button type="button" (click)="setViewMode('grid')" [class]="viewMode() === 'grid'
+        ? 'rounded-xl bg-brand-gold text-surface shadow-xs'
+        : 'rounded-xl bg-surface text-secondary-text hover:text-ink'"
+            class="flex h-10 w-10 items-center justify-center transition-all duration-200">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1.5" />
+              <rect x="14" y="3" width="7" height="7" rx="1.5" />
+              <rect x="14" y="14" width="7" height="7" rx="1.5" />
+              <rect x="3" y="14" width="7" height="7" rx="1.5" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
+
     @if (viewMode() === 'list') {
-    <app-table [data]="filteredCases()" [config]="casesTableConfig" [currentLang]="currentLang"
-      (rowAction)="onRowAction($event)" (selectionChange)="onSelectionChange($event)"
-      (sortChange)="onSortChange($event)" />
+    <div class="w-full overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+      <app-table [data]="filteredCases()" [config]="casesTableConfig" [currentLang]="currentLang"
+        (rowAction)="onRowAction($event)" (selectionChange)="onSelectionChange($event)"
+        (sortChange)="onSortChange($event)" />
+    </div>
     }
+
     @if (viewMode() === 'grid') {
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       @for (item of filteredCases(); track item.id) {
-        <app-case-card
-      [item]="item"/>
+      <app-case-card [item]="item" />
       }
     </div>
     }

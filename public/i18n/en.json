@@ -2,7 +2,8 @@
   "common": {
     "brandName": "Haroon",
     "vs": "vs",
-    "days": "days"
+    "days": "days",
+    "noCases": "No cases found"
   },
   "header": {
     "title": "Cases",

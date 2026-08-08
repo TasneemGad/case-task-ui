@@ -7,6 +7,7 @@ export const routes: Routes = [
   {
     path: '',
     component: RootComponent,
+    data: { breadcrumb: 'الرئيسية' },
     children: [
       {
         path: 'case',
@@ -14,6 +15,7 @@ export const routes: Routes = [
           import('../app/features/cases/components/cases/cases.component').then(
             (m) => m.CasesComponent,
           ),
+          data: { breadcrumb: 'navigation.cases'  },
       },
     ],
   },
