@@ -2,7 +2,8 @@
   "common": {
     "brandName": "هارون",
     "vs": "ضد",
-    "days": "يوم"
+    "days": "يوم",
+    "noCases": "لا توجد حالات"
   },
   "header": {
     "title": "القضايا",
