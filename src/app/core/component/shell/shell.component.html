@@ -1,9 +1,12 @@
-<div [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'" class="flex  bg-slate-50">
+<div [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'" class="flex  bg-pagination min-h-screen">
 
+  <div class="bg-gray-400">
   <app-sidebar />
-  <div class="flex-1 flex flex-col min-w-0 transition-all duration-300 ">
+
+  </div>
+  <div class="flex-1 flex flex-col min-w-0 transition-all duration-300  p-3 border-slate-100">
     <app-navbar />
-    <main class="flex-1 overflow-y-auto">
+    <main class="flex-1 overflow-y-auto overflow-hidden  bg-white">
       <router-outlet />
     </main>
   </div>

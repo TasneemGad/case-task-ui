@@ -6,15 +6,17 @@ import { CaseService } from '../../service/case.service';
 import { TableComponent } from "../../../../shared/component/table/table.component";
 import { TableConfig } from '../../../../shared/models/table';
 import { CaseItem } from '../../models/cases';
+import { CaseCardComponent } from "./case-card/case-card.component";
 
 @Component({
   selector: 'app-cases',
-  imports: [TranslatePipe, PaginationComponent, TableComponent],
+  imports: [TranslatePipe, PaginationComponent, TableComponent, CaseCardComponent],
   templateUrl: './cases.component.html'
 })
 export class CasesComponent {
   readonly translateService = inject(TranslateService)
   readonly casesService = inject(CaseService);
+  viewMode = signal<'grid' | 'list'>('list');
   searchQuery = signal<string>('');
   activeTab = signal<string>('all');
   currentPage = signal<number>(1);
@@ -120,5 +122,8 @@ export class CasesComponent {
   onSortChange(sort: { key: string; direction: 'asc' | 'desc' }) {
   }
 
+  setViewMode(mode: 'grid' | 'list') {
+    this.viewMode.set(mode);
+  }
 
 }

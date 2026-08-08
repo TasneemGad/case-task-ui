@@ -1,3 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+:host { direction: rtl; }
+@theme {
+  --color-brand-gold: #C9A96E;
+  --color-gold-tint: #EEE4D2;
+  --color-urgent-red: #E71E1E;
+  --color-urgent-tint: #F9ECEC;
+  --color-active-green: #3CAD44;
+  --color-active-tint: #EEFFF1;
+  --color-neutral-badge-text: #505050;
+  --color-neutral-badge-bg: #F0F0F0;
+  --color-ink: #1A1A1A;
+  --color-secondary-text: #505050;
+  --color-border: #E8E8E8;
+  --color-canvas: #F5F5F4;
+  --color-surface: #FFFFFF;
+  --color-pagination: #F6F6F6;
+}

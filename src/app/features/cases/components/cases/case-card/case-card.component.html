@@ -1,0 +1,82 @@
+<div
+  class="relative bg-surface rounded-2xl p-3 mb-1 border border-border shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow min-w-0 overflow-hidden">
+  <div>
+    <div class="flex items-start justify-between mb-1">
+      <button type="button" (click)="onMenuClick()"
+        class="w-7 h-7 rounded-full bg-canvas hover:bg-neutral-badge-bg text-secondary-text flex items-center justify-center transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+        </svg>
+      </button>
+
+      <div class="text-end">
+        <h3 class="font-bold text-ink text-base leading-snug">
+          {{ item().title }}
+        </h3>
+        <p class="text-xs text-secondary-text mt-1 flex items-center gap-1 justify-end dir-ltr">
+          <span>{{ item().category }}</span>
+          <span>-</span>
+          <span>{{ item().id }}</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-4 space-y-2.5 text-xs">
+      <!-- Stage Row -->
+      <div class="flex items-center justify-end gap-1.5 text-secondary-text">
+        <span>{{ 'table.stage' | translate }}:</span>
+        <span class="text-ink font-medium">{{ item().stage }}</span>
+      </div>
+
+      <!-- Parties Row -->
+      <div class="flex items-center justify-end gap-1.5 text-secondary-text">
+        <span>{{ 'table.parties' | translate }}:</span>
+        <div class="flex items-center gap-1.5 text-ink font-medium">
+          <div class="flex flex-col items-end">
+            <span>{{ item().party1 }}</span>
+            <span class="text-[10px] text-secondary-text font-normal">{{ item().party1Type }}</span>
+          </div>
+          <span class="text-brand-gold font-semibold text-[11px]">ضد</span>
+          <div class="flex flex-col items-end">
+            <span>{{ item().party2 }}</span>
+            <span class="text-[10px] text-secondary-text font-normal">{{ item().party2Type }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 pt-2 flex items-center justify-between border-t border-border text-xs">
+    <div>
+      @switch (item().statusKey) {
+        @case ('urgent') {
+          <span class="px-3 py-1 rounded-full text-[11px] font-medium bg-urgent-tint text-urgent-red">
+            {{ 'filters.urgent' | translate }}
+          </span>
+        }
+        @case ('ongoing') {
+          <span class="px-3 py-1 rounded-full text-[11px] font-medium bg-active-tint text-active-green">
+            {{ 'filters.ongoing' | translate }}
+          </span>
+        }
+        @case ('finished') {
+          <span class="px-3 py-1 rounded-full text-[11px] font-medium bg-neutral-badge-bg text-neutral-badge-text">
+            {{ 'filters.finished' | translate }}
+          </span>
+        }
+      }
+    </div>
+
+    <div class="flex items-center gap-1.5 text-xs">
+      <svg class="w-4 h-4 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      <span class="text-ink font-bold">{{ item().nextDateDays }} {{ 'common.days' | translate }}</span>
+      <span class="text-secondary-text">-</span>
+      <span class="text-brand-gold font-medium">{{ item().nextDateType }}</span>
+    </div>
+  </div>
+
+</div>

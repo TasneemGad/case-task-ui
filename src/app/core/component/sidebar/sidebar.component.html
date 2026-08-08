@@ -1,6 +1,6 @@
-<div class="min-h-screen ">
+<div class="bg-pagination font-sans text-slate-800 flex flex-col md:flex-row-reverse">
 <aside [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'" [class.md:w-64]="!isCollapsed()" [class.md:w-16]="isCollapsed()"
-  class="w-full bg-[#f8f9fa] md:bg-white border-b md:border-b-0 md:border-s border-slate-200/80 p-3 md:p-3 flex flex-col justify-between shrink-0 transition-all duration-300 min-h-screen">
+  class="w-full bg-pagination min-h-screen  border-b md:border-b-0 md:border-s border-slate-200/80 p-3 md:p-3 flex flex-col justify-between shrink-0 transition-all duration-300 ">
 
   <div>
     <div class="flex items-center pb-4 md:pb-6 border-b border-slate-100/60" [class.justify-between]="!isCollapsed()"
