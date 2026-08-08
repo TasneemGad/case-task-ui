@@ -1,0 +1,49 @@
+{
+  "common": {
+    "brandName": "Haroon",
+    "vs": "vs",
+    "days": "days"
+  },
+  "header": {
+    "title": "Cases",
+    "subtitle": "Manage all legal cases",
+    "newCase": "New Case"
+  },
+  "navigation": {
+    "newChat": "New Chat",
+    "clients": "Clients",
+    "adminPanel": "Admin Panel",
+    "cases": "Cases",
+    "legalLibrary": "Legal Library",
+    "chatHistory": "Chat History"
+  },
+  "filters": {
+    "all": "All",
+    "ongoing": "Ongoing",
+    "urgent": "Urgent",
+    "finished": "Finished",
+    "searchPlaceholder": "Search cases...."
+  },
+  "table": {
+    "caseNumber": "Case Number",
+    "caseTitle": "Case Title",
+    "stage": "Stage",
+    "parties": "Parties",
+    "status": "Status",
+    "nextDate": "Next Date",
+    "actions": "Actions"
+  },
+  "pagination": {
+    "show": "Show"
+  },
+  "chatTopics": {
+    "logoDesignTips": "Logo Design Tips",
+    "portugalTrip": "3-Day Trip to Portugal",
+    "effectiveIcons": "How to Use Icons Effectively",
+    "uxImportance": "Importance of Visual UX",
+    "adaptiveDesign": "Adaptive Design Strategies",
+    "negativeSpace": "Importance of Negative Space in Design",
+    "fontsBranding": "Impact of Fonts on Visual Identity",
+    "colorPalette": "Color Selection Strategies"
+  }
+}
