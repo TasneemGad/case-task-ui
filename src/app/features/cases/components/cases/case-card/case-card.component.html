@@ -1,9 +1,9 @@
 <div dir="ltr"
-  class="relative bg-surface rounded-2xl p-3 mb-1 border border-border shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow min-w-0 overflow-hidden">
+  class="relative bg-surface rounded-2xl p-3 mb-1 border border-border shadow-xs flex flex-col justify-between transition-all duration-200 hover:shadow-md hover:border-border/80 hover:-translate-y-0.5 min-w-0 overflow-hidden group">
   <div>
     <div class="flex items-start justify-between mb-1">
       <button type="button" (click)="onMenuClick()"
-        class="w-7 h-7 rounded-full  hover:bg-neutral-badge-bg text-secondary-text flex items-center justify-center transition-colors">
+        class="w-7 h-7 rounded-full hover:bg-neutral-badge-bg active:scale-95 text-secondary-text hover:text-ink flex items-center justify-center transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-1 cursor-pointer">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
           <path
             d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
@@ -11,7 +11,7 @@
       </button>
 
       <div class="text-end">
-        <h3 class="font-bold text-ink text-base leading-snug">
+        <h3 class="font-bold text-ink text-base leading-snug group-hover:text-brand-gold transition-colors duration-200">
           {{ item().title }}
         </h3>
         <p class="text-xs text-secondary-text mt-1 flex items-center gap-1 justify-end dir-ltr">
@@ -35,7 +35,7 @@
             <span class="text-[10px] text-secondary-text font-normal">{{ item().party2Type }}</span>
           </div>
 
-          <span class="text-brand-gold font-semibold text-[11px] self-center">ضد</span>
+          <span class="text-brand-gold font-semibold text-[11px] self-center px-1.5 py-0.5 rounded-md bg-brand-gold/10">ضد</span>
 
           <div class="flex flex-col items-end">
             <span class="truncate max-w-22.5 text-end">{{ item().party1 }}</span>
@@ -48,45 +48,38 @@
     </div>
   </div>
 
-  <div class="mt-6 pt-2 flex items-center justify-between  text-xs">
+  <div class="mt-6 pt-2 flex items-center justify-between text-xs border-t border-transparent group-hover:border-border/40 transition-colors duration-200">
     <div>
       @switch (item().statusKey) {
-      @case ('urgent') {
-      <span class="px-3 py-1 rounded-full text-[11px] font-medium bg-urgent-tint text-urgent-red">
-        {{ 'filters.urgent' | translate }}
-      </span>
-      }
-      @case ('ongoing') {
-      <span class="px-3 py-1 rounded-full text-[11px] font-medium bg-active-tint text-active-green">
-        {{ 'filters.ongoing' | translate }}
-      </span>
-      }
-      @case ('finished') {
-      <span class="px-3 py-1 rounded-full text-[11px] font-medium bg-neutral-badge-bg text-neutral-badge-text">
-        {{ 'filters.finished' | translate }}
-      </span>
-      }
+        @case ('urgent') {
+          <span class="px-3 py-1 rounded-full text-[11px] font-medium bg-urgent-tint text-urgent-red hover:brightness-95 transition-all cursor-default inline-block">
+            {{ 'filters.urgent' | translate }}
+          </span>
+        }
+        @case ('ongoing') {
+          <span class="px-3 py-1 rounded-full text-[11px] font-medium bg-active-tint text-active-green hover:brightness-95 transition-all cursor-default inline-block">
+            {{ 'filters.ongoing' | translate }}
+          </span>
+        }
+        @case ('finished') {
+          <span class="px-3 py-1 rounded-full text-[11px] font-medium bg-neutral-badge-bg text-neutral-badge-text hover:brightness-95 transition-all cursor-default inline-block">
+            {{ 'filters.finished' | translate }}
+          </span>
+        }
       }
     </div>
 
-    <div class="flex items-center gap-1.5 text-xs">
+    <div class="flex items-center gap-1.5 text-xs text-secondary-text hover:text-ink transition-colors cursor-default">
       <span class="text-brand-gold font-medium">{{ item().nextDateType }}</span>
-      <span class="text-secondary-text">-</span>
+      <span>-</span>
       <span class="text-ink font-bold">{{ item().nextDateDays }} {{ 'common.days' | translate }}</span>
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7.33337 9.33334H8.00004V12" stroke="#191919" stroke-width="1.04167" stroke-linecap="round"
-          stroke-linejoin="round" />
-        <path d="M10.6666 1.33334V4.00001" stroke="#191919" stroke-width="1.04167" stroke-linecap="round"
-          stroke-linejoin="round" />
-        <path d="M2 6.66666H14" stroke="#191919" stroke-width="1.04167" stroke-linecap="round"
-          stroke-linejoin="round" />
-        <path d="M5.33337 1.33334V4.00001" stroke="#191919" stroke-width="1.04167" stroke-linecap="round"
-          stroke-linejoin="round" />
-        <path
-          d="M12.6667 2.66666H3.33333C2.59695 2.66666 2 3.26361 2 3.99999V13.3333C2 14.0697 2.59695 14.6667 3.33333 14.6667H12.6667C13.403 14.6667 14 14.0697 14 13.3333V3.99999C14 3.26361 13.403 2.66666 12.6667 2.66666Z"
-          stroke="#191919" stroke-width="1.04167" stroke-linecap="round" stroke-linejoin="round" />
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform duration-200 group-hover:scale-110">
+        <path d="M7.33337 9.33334H8.00004V12" stroke="currentColor" stroke-width="1.04167" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M10.6666 1.33334V4.00001" stroke="currentColor" stroke-width="1.04167" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M2 6.66666H14" stroke="currentColor" stroke-width="1.04167" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M5.33337 1.33334V4.00001" stroke="currentColor" stroke-width="1.04167" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12.6667 2.66666H3.33333C2.59695 2.66666 2 3.26361 2 3.99999V13.3333C2 14.0697 2.59695 14.6667 3.33333 14.6667H12.6667C13.403 14.6667 14 14.0697 14 13.3333V3.99999C14 3.26361 13.403 2.66666 12.6667 2.66666Z" stroke="currentColor" stroke-width="1.04167" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
-
     </div>
   </div>
 </div>

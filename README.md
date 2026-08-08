@@ -1,59 +1,81 @@
 # CasesTask
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.3.
+A case management UI built with Angular 22.1.3 and Tailwind CSS.
 
-## Development server
+This project includes a paginated cases page with search, filter tabs, and list/grid display modes. It uses mock case data from a service and supports Arabic translation via `@ngx-translate`.
 
-To start a local development server, run:
+## What this project implements
 
-```bash
-ng serve
-```
+- A root shell layout with sidebar, navbar, and routed main content.
+- A case page at `/case` with a default redirect from the app root.
+- Case listing in both table and card grid views.
+- Search filter and status tabs: all, ongoing, urgent, and finished.
+- Pagination across mock pages of case data.
+- Mock case data provided by `src/app/features/cases/service/case.service.ts`.
+- Localization using `@ngx-translate` with translation files under `src/app/i18n`.
+- UI built for Arabic display and bidirectional layout support.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Key files
 
-## Code scaffolding
+- `src/app/app.routes.ts` - app routing configuration.
+- `src/app/core/component/shell/shell.component.ts` - root layout component.
+- `src/app/features/cases/components/cases/cases.component.ts` - cases page logic and UI behavior.
+- `src/app/features/cases/service/case.service.ts` - mock cases data provider.
+- `src/app/shared/component/table/table.component.ts` - shared table component used for list view.
+- `src/app/shared/component/pagination/pagination.component.ts` - pagination controls.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Setup
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Install dependencies:
 
 ```bash
-ng build
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Start the development server:
 
 ```bash
-ng test
+npm start or ng serve
 ```
 
-## Running end-to-end tests
+Open the app in your browser:
 
-For end-to-end (e2e) testing, run:
+```text
+http://localhost:4200/
+```
+
+## Build
+
+Build the project for production:
 
 ```bash
-ng e2e
+npm run build or ng serve
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The production build artifacts are output to the `dist/` directory.
+## Deployment
 
-## Additional Resources
+A GitHub Actions workflow is configured in `.github/workflows/deploy.yml`.
+When code is pushed to the `dev` branch, the `build-and-deploy` job runs and deploys the app to GitHub Pages.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Environment
+
+- Angular CLI: 22.1.3
+- Angular framework packages: ^22.1.0
+- Recommended Node.js: 20.x
+- Package manager: npm 11.19.0
+
+## Decisions and trade-offs
+
+- Used mock data in `CaseService` so UI behavior can be reviewed without a backend.
+- Implemented list and grid views together to match the expected case management layout.
+- Kept action handlers scaffolded for future extension rather than implementing incomplete behavior.
+- Chose `@ngx-translate` for localization support while keeping translation keys simple.
+- Assumed Figma intended a focused case dashboard with search, filter tabs, and pagination, not a full case detail flow.
+- Prioritized Arabic-first styling and directionality given the app content and translation setup.
+
+## Notes
+
+- Case data is currently hardcoded in `CaseService` and paginated across two pages.
+- Some action handlers in the cases page are scaffolded but not fully implemented.
+- The UI uses Arabic translations and can be extended for more languages.
